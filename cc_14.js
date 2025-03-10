@@ -28,9 +28,12 @@ priorityLevel.classList.add('prioritylevel');
 const resolveButton = document.createElement('button');
     resolveButton.textContent = 'Resolve';
     resolveButton.setAttribute('class', 'resolve-button');
-
-    resolveButton.addEventListener('click', () => {
-        ticketCard.remove(); 
+     
+    // task 4: 
+    // adding event listener to resolve button
+    resolveButton.addEventListener("click", function(event) {
+        event.stopPropagation(); // prevents bubbling in the button's event handler
+        ticketContainer.removeChild(ticketCard); // removes ticket when "Resolve" is clicked
     });
 
 
@@ -43,7 +46,8 @@ ticketCard.appendChild(resolveButton);
 ticketContainer.appendChild(ticketCard);
 }
 
-// adding a ticket with High priority
+// test data:
+// adding tickets with High priority
 addSupportTicket("Shrek", "Unable to create account", "High");
 addSupportTicket("Donkey", "Unable to log in", "Low");
 addSupportTicket("Fiona", "Unable to reset password", "High");
@@ -74,6 +78,14 @@ function highlightTickets() {
 // call the function
 highlightTickets();
 
+//Task 4: Implementing Ticket Resolution with Event Bubbling
+
+const ticketContainer = document.getElementById("ticketContainer");
+// adding an event listener to add a message to console once it's been clicked
+ticketContainer.addEventListener('click', function() {
+    // logs a message when any ticket is clicked
+    console.log("Ticket container has been clicked.");
+});
 
 
 
